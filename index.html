@@ -3,301 +3,102 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Humanitarian Logistics Ecosystems — Interactive DRM Game | UNAD Phase 2</title>
-  <meta name="description" content="Interactive Web 2.0 Digital Game on International and National Disaster Risk Management (DRM) & Humanitarian Logistics Actors. Course: Humanitarian Smart Cities (203428682) - UNAD." />
+  <title>DRM Actors Quiz (25 Questions) | Humanitarian Smart Cities - UNAD</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- Background Tactical Grid & Glow -->
-  <div class="bg-grid"></div>
-  <div class="bg-glow glow-1"></div>
-  <div class="bg-glow glow-2"></div>
-
-  <!-- Top Navigation / Academic Header -->
-  <header class="top-header">
-    <div class="header-container">
-      <div class="brand-badge">
-        <span class="pulse-dot"></span>
-        <span class="brand-code">UNAD · ECBTI · CODE 203428682</span>
+  <!-- Compact Top Header -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="title-block">
+        <span class="badge-unad">UNAD · 203428682</span>
+        <h1>Humanitarian Smart Cities — Phase 2: DRM Actors Game (25 Q&amp;A)</h1>
       </div>
-      <div class="header-title">
-        <h1>Humanitarian Smart Cities <span class="divider">|</span> <span class="phase-tag">Phase 2: Humanitarian Logistics Ecosystems</span></h1>
-      </div>
-      <div class="author-pill">
-        <span class="author-label">Author:</span>
-        <span class="author-name">Marcelo Barraza</span>
-        <span class="role-badge">Role: Leader</span>
+      <div class="student-block">
+        <span><strong>Marcelo Barraza</strong></span>
+        <div class="view-switch">
+          <button id="btn-mode-quiz" class="tab-btn active" onclick="setMode('quiz')">Play Game</button>
+          <button id="btn-mode-list" class="tab-btn" onclick="setMode('list')">All 25 Q&amp;A (Answer Key)</button>
+        </div>
       </div>
     </div>
   </header>
 
-  <main class="main-container">
-    <!-- Mode Switcher Bar -->
-    <nav class="mode-bar" aria-label="Application View Modes">
-      <button id="tab-welcome" class="mode-tab active" onclick="switchView('welcome')">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-        Mission Briefing
-      </button>
-      <button id="tab-game" class="mode-tab" onclick="switchView('game')">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        Interactive Game (25 Qs)
-      </button>
-      <button id="tab-flashcards" class="mode-tab" onclick="switchView('flashcards')">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
-        Actor Flashcards
-      </button>
-      <button id="tab-catalog" class="mode-tab" onclick="switchView('catalog')">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-        Tutor Verification (All 25 Q&A)
-      </button>
-    </nav>
+  <main class="container">
+    <!-- MODE 1: DIRECT INTERACTIVE QUIZ (OPENS IMMEDIATELY) -->
+    <section id="section-quiz" class="view-panel active">
+      <!-- Progress & Score Bar -->
+      <div class="status-bar">
+        <div class="status-item">
+          <span class="status-label">Question</span>
+          <strong id="q-counter">1 / 25</strong>
+        </div>
+        <div class="progress-wrapper">
+          <div id="progress-fill" class="progress-fill" style="width: 4%"></div>
+        </div>
+        <div class="status-metrics">
+          <span class="metric-pill">Score: <strong id="score-val">0</strong> / 25</span>
+          <button class="btn-reset" onclick="resetQuiz()" title="Restart Quiz">Restart</button>
+        </div>
+      </div>
 
-    <!-- VIEW 1: WELCOME / BRIEFING -->
-    <section id="view-welcome" class="view-section active">
-      <div class="hero-card">
-        <div class="hero-content">
-          <div class="eyebrow-badge">STEP 1 · INDIVIDUAL DYNAMIC · WEB 2.0 DIGITAL GAME</div>
-          <h2 class="hero-heading">Global & National Disaster Risk Management Actors Command Simulator</h2>
-          <p class="hero-description">
-            An interactive Web 2.0 educational game designed to evaluate and strengthen mastery over the institutional frameworks, operational entities, and international mechanisms governing <strong>Humanitarian Logistics Ecosystems</strong> and <strong>Disaster Risk Management (DRM)</strong>.
-          </p>
+      <!-- Question Number Selector (1 to 25) -->
+      <div id="q-nav" class="q-nav"></div>
 
-          <div class="stats-grid">
-            <div class="stat-box">
-              <span class="stat-num">25</span>
-              <span class="stat-label">Verified Questions & Justifications</span>
-            </div>
-            <div class="stat-box">
-              <span class="stat-num">12</span>
-              <span class="stat-label">National Actors (Law 1523 / SNGRD / LCA)</span>
-            </div>
-            <div class="stat-box">
-              <span class="stat-num">13</span>
-              <span class="stat-label">Global Actors (Sendai / SDGs / INFORM / UN)</span>
-            </div>
-            <div class="stat-box">
-              <span class="stat-num">100%</span>
-              <span class="stat-label">APA 7th & Phase 2 Guide Aligned</span>
-            </div>
-          </div>
+      <!-- Active Question Card -->
+      <div id="question-card" class="card">
+        <div class="q-tags">
+          <span id="q-scope" class="tag tag-scope">National</span>
+          <span id="q-source" class="tag tag-source">Law 1523 of 2012</span>
+        </div>
 
-          <div class="cta-group">
-            <button class="btn btn-primary btn-lg" onclick="startNewGame('all')">
-              <span>Launch Full 25-Question Simulation</span>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </button>
-            <button class="btn btn-secondary btn-lg" onclick="switchView('catalog')">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-              <span>Open Full 25 Q&A Answer Key (Tutor View)</span>
-            </button>
+        <h2 id="q-text" class="q-title">1. Question text</h2>
+
+        <div id="q-options" class="options-list"></div>
+
+        <!-- Instant Feedback -->
+        <div id="q-feedback" class="feedback hidden">
+          <div class="feedback-row">
+            <p id="feedback-msg"></p>
+            <button id="btn-next" class="btn-primary" onclick="goNext()">Next →</button>
           </div>
         </div>
 
-        <div class="frameworks-panel">
-          <h3>Covered Regulatory & Academic Frameworks</h3>
-          <ul class="framework-list">
-            <li>
-              <span class="fw-tag nat">COLOMBIA</span>
-              <div>
-                <strong>Law 1523 of 2012 (SNGRD)</strong>
-                <p>UNGRD, National Council, National Committees (Risk Knowledge, Risk Reduction, Disaster Management), FNGRD, Governors & Mayors.</p>
-              </div>
-            </li>
-            <li>
-              <span class="fw-tag nat">LCA COL</span>
-              <div>
-                <strong>Logistics Capacity Assessment (Colombia)</strong>
-                <p>Operational actors (Civil Defense, Red Cross, Fire Depts, Military), DIAN customs clearance, Aerocivil, INVÍAS, SGC & IDEAM.</p>
-              </div>
-            </li>
-            <li>
-              <span class="fw-tag intl">UN / GLOBAL</span>
-              <div>
-                <strong>Sendai Framework (2015–2030) & 2030 Agenda (SDGs)</strong>
-                <p>UNDRR, Four Priorities for Action, Build Back Better, SDG 11 (Resilient Cities), SDG 13 (Climate Action), WFP Global Logistics Cluster & UN OCHA.</p>
-              </div>
-            </li>
-            <li>
-              <span class="fw-tag acad">ACADEMIC</span>
-              <div>
-                <strong>INFORM Risk Index (2024) & Arango Pastrana (2023)</strong>
-                <p>Hazard & Exposure, Vulnerability, Lack of Coping Capacity (Institutional & Infrastructure), and multi-actor supply chain optimization.</p>
-              </div>
-            </li>
-          </ul>
+        <!-- Prev / Next Navigation Footer -->
+        <div class="card-footer">
+          <button id="btn-prev" class="btn-outline" onclick="goPrev()">← Previous</button>
+          <span id="q-status-hint" class="hint-text">Select an option to verify the answer</span>
+          <button id="btn-skip" class="btn-outline" onclick="goNext()">Next →</button>
+        </div>
+      </div>
+
+      <!-- Final Summary Card -->
+      <div id="summary-card" class="card summary-card hidden">
+        <h2>Quiz Completed!</h2>
+        <p class="summary-score">Final Score: <strong id="final-score">25 / 25</strong> (<span id="final-pct">100%</span>)</p>
+        <div class="summary-actions">
+          <button class="btn-primary" onclick="resetQuiz()">Play Again</button>
+          <button class="btn-outline" onclick="setMode('list')">View All 25 Questions &amp; Correct Answers</button>
         </div>
       </div>
     </section>
 
-    <!-- VIEW 2: INTERACTIVE QUIZ GAME -->
-    <section id="view-game" class="view-section">
-      <div class="game-top-hud">
-        <div class="hud-left">
-          <span class="hud-pill" id="hud-category">NATIONAL FRAMEWORK</span>
-          <span class="hud-counter">Question <strong id="q-current-idx">1</strong> of <strong id="q-total-count">25</strong></span>
-        </div>
-        <div class="hud-center">
-          <div class="progress-track">
-            <div class="progress-fill" id="q-progress-bar" style="width: 4%"></div>
-          </div>
-        </div>
-        <div class="hud-right">
-          <div class="hud-metric">
-            <span class="metric-label">Score</span>
-            <span class="metric-val" id="hud-score">0</span>
-          </div>
-          <div class="hud-metric">
-            <span class="metric-label">Streak</span>
-            <span class="metric-val streak" id="hud-streak">0🔥</span>
-          </div>
-          <div class="hud-metric">
-            <span class="metric-label">Accuracy</span>
-            <span class="metric-val" id="hud-accuracy">100%</span>
-          </div>
+    <!-- MODE 2: CLEAN LIST OF ALL 25 QUESTIONS & ANSWERS -->
+    <section id="section-list" class="view-panel">
+      <div class="list-toolbar">
+        <h2>Complete Bank of 25 Questions &amp; Correct Answers</h2>
+        <div class="filter-group">
+          <button class="filter-chip active" onclick="filterList('all', this)">All (25)</button>
+          <button class="filter-chip" onclick="filterList('National', this)">National Actors (12)</button>
+          <button class="filter-chip" onclick="filterList('International', this)">International Actors (13)</button>
         </div>
       </div>
-
-      <div id="quiz-active-container" class="quiz-card">
-        <div class="question-meta-row">
-          <span class="actor-badge" id="q-actor-focus">Actor Focus: UNGRD & SNGRD</span>
-          <span class="ref-badge" id="q-ref-source">Ref: Law 1523 of 2012</span>
-        </div>
-
-        <h2 class="question-title" id="q-text">Loading question...</h2>
-
-        <div class="options-grid" id="q-options">
-          <!-- Populated dynamically via app.js -->
-        </div>
-
-        <!-- Feedback & Academic Explanation Drawer -->
-        <div id="q-feedback" class="feedback-box hidden">
-          <div class="feedback-header">
-            <span id="feedback-icon" class="feedback-status-icon">✓</span>
-            <strong id="feedback-title">Correct Answer!</strong>
-          </div>
-          <p id="feedback-explanation" class="feedback-text"></p>
-          <div class="feedback-actions">
-            <button id="btn-next-q" class="btn btn-primary" onclick="nextQuestion()">
-              Next Question →
-            </button>
-          </div>
-        </div>
-
-        <!-- Quick Question Navigator Dots -->
-        <div class="q-navigator-wrapper">
-          <span class="nav-label">Direct Question Jump (1–25):</span>
-          <div id="q-dots-container" class="q-dots"></div>
-        </div>
-      </div>
-
-      <!-- Final Results Card (Hidden until game finishes) -->
-      <div id="quiz-results-container" class="results-card hidden">
-        <div class="results-badge">MISSION SIMULATION COMPLETED</div>
-        <h2 id="res-headline">Outstanding Command of Humanitarian Logistics Ecosystems!</h2>
-        <p class="res-subtitle">Course: Humanitarian Smart Cities (203428682) · Phase 2 · Student: Marcelo Barraza</p>
-
-        <div class="results-score-circle">
-          <div class="score-big" id="res-final-correct">25 / 25</div>
-          <div class="score-pct" id="res-final-pct">100% Mastery</div>
-        </div>
-
-        <div class="results-breakdown">
-          <div class="breakdown-item">
-            <span>Total Points Earned</span>
-            <strong id="res-total-points">2500 pts</strong>
-          </div>
-          <div class="breakdown-item">
-            <span>National Actors (Q1–Q12)</span>
-            <strong id="res-nat-score">12 / 12</strong>
-          </div>
-          <div class="breakdown-item">
-            <span>International Frameworks (Q13–Q25)</span>
-            <strong id="res-intl-score">13 / 13</strong>
-          </div>
-        </div>
-
-        <div class="cta-group center">
-          <button class="btn btn-primary btn-lg" onclick="startNewGame('all')">Play Again (Restart 25 Questions)</button>
-          <button class="btn btn-secondary btn-lg" onclick="switchView('catalog')">Review All 25 Questions & Answers</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- VIEW 3: INTERACTIVE FLASHCARDS -->
-    <section id="view-flashcards" class="view-section">
-      <div class="section-header-bar">
-        <div>
-          <h2>Interactive Study Flashcards (25 DRM Actors & Concepts)</h2>
-          <p>Click on the card to flip between the question challenge and the official answer with academic justification.</p>
-        </div>
-        <div class="flashcard-controls">
-          <button class="btn btn-secondary" onclick="prevFlashcard()">← Previous</button>
-          <span id="fc-counter" class="fc-count-pill">1 / 25</span>
-          <button class="btn btn-secondary" onclick="nextFlashcard()">Next →</button>
-        </div>
-      </div>
-
-      <div class="flashcard-stage">
-        <div id="flashcard-el" class="flashcard" onclick="flipFlashcard()">
-          <div class="flashcard-face flashcard-front">
-            <div class="fc-top-meta">
-              <span id="fc-category" class="fw-tag nat">NATIONAL</span>
-              <span id="fc-number">Question #1 of 25</span>
-            </div>
-            <h3 id="fc-question-text" class="fc-main-text">Question text</h3>
-            <div class="fc-options-preview" id="fc-options-list"></div>
-            <div class="fc-hint">Click anywhere on card to flip for Correct Answer ↻</div>
-          </div>
-          <div class="flashcard-face flashcard-back">
-            <div class="fc-top-meta">
-              <span class="fw-tag verified">OFFICIAL CORRECT ANSWER</span>
-              <span id="fc-ref-back">Reference</span>
-            </div>
-            <h3 id="fc-answer-text" class="fc-answer-highlight">Correct Answer</h3>
-            <p id="fc-explanation-text" class="fc-explanation"></p>
-            <div class="fc-hint">Click anywhere to flip back to Question ↻</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- VIEW 4: TUTOR VERIFICATION / COMPLETE 25 Q&A CATALOG -->
-    <section id="view-catalog" class="view-section">
-      <div class="catalog-header">
-        <div>
-          <span class="eyebrow-badge">TUTOR VERIFICATION MODE · EVIDENCE BANK</span>
-          <h2>Complete Repository of 25 Questions, Correct Answers & Academic Justifications</h2>
-          <p>Filter by scope or search keywords to inspect all 25 items required by Step 1 of the Phase 2 Learning Guide.</p>
-        </div>
-        <div class="catalog-filters">
-          <input type="text" id="catalog-search" class="search-input" placeholder="Search actor, law, SDG, Sendai, INFORM..." oninput="renderCatalog()" />
-          <div class="filter-pills">
-            <button class="filter-btn active" data-filter="all" onclick="setCatalogFilter('all', this)">All (25)</button>
-            <button class="filter-btn" data-filter="National" onclick="setCatalogFilter('National', this)">National - Colombia (12)</button>
-            <button class="filter-btn" data-filter="International" onclick="setCatalogFilter('International', this)">International & Academic (13)</button>
-          </div>
-        </div>
-      </div>
-
-      <div id="catalog-list" class="catalog-grid">
-        <!-- Rendered dynamically by app.js -->
-      </div>
+      <div id="all-questions-list" class="qa-list"></div>
     </section>
   </main>
-
-  <footer class="app-footer">
-    <div class="footer-inner">
-      <div>
-        <strong>Universidad Nacional Abierta y a Distancia (UNAD)</strong> · Vicerrectoría Académica y de Investigación · ECBTI
-      </div>
-      <div>
-        Course: <strong>Humanitarian Smart Cities (203428682)</strong> · Phase 2: Humanitarian Logistics Ecosystems · Student: <strong>Marcelo Barraza</strong> (2026)
-      </div>
-    </div>
-  </footer>
 
   <script src="app.js"></script>
 </body>
